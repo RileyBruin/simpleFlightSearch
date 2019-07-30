@@ -1,0 +1,83 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<h1>The flight searcher</h1>
+<p>You can input part of the info.<br>
+  Ex, for flight number, if you input "200," the flight "2005" will be returned.<br>
+  If you just input "O" in Origin, "SFO" ,"ORD" ... will be returned<br>
+
+</p>
+
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+  
+  <label>
+    Flight Number:
+    <input type="text" maxlength="4" formControlName="flight_num">
+  </label>
+
+  <label>
+    Origin:
+    <input type="text"  maxlength ="3"  formControlName="origin"  >
+  </label>
+
+  <label>
+    Destination:
+    <input type="text" maxlength ="3" formControlName="destination" >
+  </label>
+
+  <label>
+    Date:
+    <input type="date" formControlName="date" 
+    value="2018-07-22"
+    min="2018-01-01" max="2020-12-31">
+
+
+
+  </label>
+  
+  
+    <input type="submit" value="Search" class="buttons">
+  
+  
+  </form>
+  <br><br>
+
+
+<table *ngIf="allflights && operate">
+
+    <tr *ngIf="this.hasResult">
+      <th>Flight Number&nbsp;</th>
+      <th>Carrier&nbsp;</th>
+      <th>Origin&nbsp;</th>
+      <th>Departure&nbsp;</th>
+      <th>Destination&nbsp;</th>
+      <th>Arrival&nbsp;</th>
+      <th>Aircraft&nbsp;</th>
+      <th>Distance&nbsp;</th>
+      <th>Travel Time&nbsp;</th>
+      <th>Status&nbsp;</th>
+    </tr>
+
+  <tr *ngFor="let flight of allflights">
+      <th>{{flight.flightNumber}}&nbsp;</th>
+      <th>{{flight.carrier}}&nbsp;</th>
+      <th>{{flight.origin}}&nbsp;</th>
+      <th>{{flight.departure}}&nbsp;</th>
+      <th>{{flight.destination}}&nbsp;</th>
+      <th>{{flight.arrival}}&nbsp;</th>
+      <th>{{flight.aircraft}}&nbsp;</th>
+      <th>{{flight.distance}}&nbsp;</th>
+      <th>{{flight.travelTime}}&nbsp;</th>
+      <th>{{flight.status}}&nbsp;</th>
+  </tr>
+
+</table>
+
+ <div *ngIf="!this.hasResult" style="font-size: 150%">No results</div>
+ <div *ngIf="!this.operate">
+    <div *ngFor="let error1 of errorMessage" style="color:red">
+        {{error1}}<br>
+    </div>
+</div>
+
+
+<!-- <router-outlet></router-outlet> -->
